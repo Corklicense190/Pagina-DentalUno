@@ -1,0 +1,258 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+---
+
+<Layout title="Agendar Cita - Dental Uno">
+  <Navbar />
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <div class="mb-10">
+      <h1 class="text-4xl font-black text-slate-900 tracking-tight mb-2">Agendar Cita</h1>
+      <p class="text-[#5600b2] font-medium">Complete el formulario para programar su visita al consultorio.</p>
+    </div>
+
+    
+    <div class="flex p-1 bg-[#5600b2]/10 rounded-xl border-2 border-[#5600b2]/10 mb-8">
+      <button id="tab-nueva" onclick="switchTab('nueva')"
+        class="flex-1 py-4 rounded-lg text-sm font-semibold transition-all bg-white shadow-sm">
+        Nueva Cita
+      </button>
+      <button id="tab-reagendar" onclick="switchTab('reagendar')"
+        class="flex-1 py-4 rounded-lg text-sm font-semibold transition-all">
+        Reagendar
+      </button>
+      <button id="tab-cancelar" onclick="switchTab('cancelar')"
+        class="flex-1 py-4 rounded-lg text-sm font-semibold transition-all">
+        Cancelar
+      </button>
+    </div>
+
+    
+    <div id="panel-nueva" class="space-y-8">
+
+      <section class="bg-white p-6 rounded-xl border border-[#5600b2]/10 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#5600b2]">person</span>
+          Información del Paciente
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="col-span-1 md:col-span-2">
+            <label class="block text-sm font-medium mb-2">Nombre Completo</label>
+            <input class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="Ej. Juan Pérez" type="text" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Correo Electrónico</label>
+            <input class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="juan@ejemplo.com" type="email" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Teléfono</label>
+            <input class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="+52 (55) 0000-0000" type="tel" />
+          </div>
+        </div>
+      </section>
+
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-xl border border-[#5600b2]/10 shadow-sm">
+          <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[#5600b2]">groups</span>
+            Categoría del Paciente
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="relative flex cursor-pointer rounded-lg border border-[#5600b2]/20 p-4 hover:bg-[#5600b2]/5 transition-colors has-checked:ring-2 has-checked:ring-[#5600b2] has-checked:border-transparent">
+              <input checked class="sr-only" name="categoria" type="radio" value="adulto" />
+              <span class="flex flex-col items-center w-full">
+                <span class="material-symbols-outlined text-3xl mb-1 text-[#5600b2]">person</span>
+                <span class="text-sm font-bold">Adulto</span>
+              </span>
+            </label>
+            <label class="relative flex cursor-pointer rounded-lg border border-[#5600b2]/20 p-4 hover:bg-[#5600b2]/5 transition-colors has-checked:ring-2 has-checked:ring-[#5600b2] has-checked:border-transparent">
+              <input class="sr-only" name="categoria" type="radio" value="nino" />
+              <span class="flex flex-col items-center w-full">
+                <span class="material-symbols-outlined text-3xl mb-1 text-[#5600b2]">child_care</span>
+                <span class="text-sm font-bold">Niño</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-[#5600b2]/10 shadow-sm">
+          <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[#5600b2]">medical_services</span>
+            Tratamiento Requerido
+          </h3>
+          <select class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]">
+            <option disabled selected value="">Seleccione el servicio...</option>
+            <optgroup label="Adultos">
+                <option>Cita de Valoración</option>
+                <option>Limpieza Dental</option>
+            </optgroup>
+            <optgroup label="Niños">
+              <option>Primera Revisión Dental</option>
+              <option>Limpieza Dental</option>
+            </optgroup>
+        </select>
+          <div id="campo-otro" class="hidden mt-3">
+            <label class="block text-sm font-medium mb-2">Especifica el tratamiento</label>
+            <input id="input-otro" class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="Describe el tratamiento que necesitas" type="text" />
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white p-6 rounded-xl border border-[#5600b2]/10 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#5600b2]">schedule</span>
+          Fecha y Horario
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium mb-2">Seleccionar Fecha</label>
+            <input class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" type="date" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Horario Preferido</label>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="cursor-pointer">
+                <input class="hidden peer" name="horario" type="radio" />
+                <div class="text-center py-2 px-3 border border-[#5600b2]/10 rounded-lg peer-checked:bg-[#5600b2] peer-checked:text-white transition-all text-sm font-medium">Mañana (9-13h)</div>
+              </label>
+              <label class="cursor-pointer">
+                <input class="hidden peer" name="horario" type="radio" />
+                <div class="text-center py-2 px-3 border border-[#5600b2]/10 rounded-lg peer-checked:bg-[#5600b2] peer-checked:text-white transition-all text-sm font-medium">Tarde (14-19h)</div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#5600b2]">chat_bubble</span>
+          Notas Médicas o Comentarios
+        </h3>
+        <textarea class="w-full rounded-xl border border-[#5600b2]/20 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="¿Desea agregar algo más sobre el motivo de su visita?" rows="4"></textarea>
+      </section>
+
+      <button data-confirm="nueva" class="w-full bg-[#5600b2] text-white py-5 px-8 rounded-xl font-black text-xl hover:shadow-2xl hover:shadow-[#5600b2]/40 transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+        Confirmar Cita
+        <span class="material-symbols-outlined">send</span>
+        </button>
+      <p class="text-center text-xs text-slate-500 px-10">Al agendar, recibirá una confirmación vía WhatsApp o correo en las próximas 24 horas.</p>
+    </div>
+
+    
+    <div id="panel-reagendar" class="hidden space-y-8">
+      <section class="bg-white p-6 rounded-xl border border-[#5600b2]/10 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#5600b2]">person_search</span>
+          Buscar mi Cita
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="col-span-1 md:col-span-2">
+            <label class="block text-sm font-medium mb-2">Nombre Completo</label>
+            <input class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="Ej. Juan Pérez" type="text" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Correo Electrónico</label>
+            <input class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="juan@ejemplo.com" type="email" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Teléfono</label>
+            <input class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="+52 (55) 0000-0000" type="tel" />
+          </div>
+          <div class="col-span-1 md:col-span-2">
+            <label class="block text-sm font-medium mb-2">Nueva Fecha</label>
+            <input class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" type="date" />
+          </div>
+          <div class="col-span-1 md:col-span-2">
+            <label class="block text-sm font-medium mb-2">Razón de reagendado <span class="text-slate-400 font-normal">(opcional)</span></label>
+            <textarea class="w-full rounded-xl border border-[#5600b2]/20 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="¿Por qué necesita cambiar su cita?" rows="3"></textarea>
+          </div>
+        </div>
+      </section>
+      <button data-confirm="reagendar" class="w-full bg-[#5600b2] text-white py-5 px-8 rounded-xl font-black text-xl hover:shadow-2xl hover:shadow-[#5600b2]/40 transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+          Confirmar Reagendado
+          <span class="material-symbols-outlined">event_repeat</span>
+      </button>
+    </div>
+
+    
+    <div id="panel-cancelar" class="hidden space-y-8">
+      <section class="bg-white p-6 rounded-xl border border-[#5600b2]/10 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#5600b2]">person_search</span>
+          Buscar mi Cita
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="col-span-1 md:col-span-2">
+            <label class="block text-sm font-medium mb-2">Nombre Completo</label>
+            <input class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="Ej. Juan Pérez" type="text" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Correo Electrónico</label>
+            <input class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="juan@ejemplo.com" type="email" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Teléfono</label>
+            <input class="w-full rounded-lg border border-[#5600b2]/20 bg-[#f7f5f8] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="+52 (55) 0000-0000" type="tel" />
+          </div>
+          <div class="col-span-1 md:col-span-2">
+            <label class="block text-sm font-medium mb-2">Razón de cancelación <span class="text-slate-400 font-normal">(opcional)</span></label>
+            <textarea class="w-full rounded-xl border border-[#5600b2]/20 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#5600b2]" placeholder="¿Por qué necesita cancelar su cita?" rows="3"></textarea>
+          </div>
+        </div>
+      </section>
+      <button data-confirm="cancelar" class="w-full bg-red-600 text-white py-5 px-8 rounded-xl font-black text-xl hover:shadow-2xl hover:shadow-red-600/40 transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+        Confirmar Cancelación
+        <span class="material-symbols-outlined">cancel</span>
+      </button>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-[#5600b2]/10 mt-20 py-10 bg-white">
+    <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-2 text-slate-500">
+        <span class="material-symbols-outlined text-[#5600b2]/60">dentistry</span>
+        <span class="font-medium text-sm">© 2025 Dental Uno. Sonrisas que Importan.</span>
+      </div>
+      <div class="flex gap-6">
+        <a class="text-sm text-slate-500 hover:text-[#5600b2] transition-colors" href="/">Inicio</a>
+        <a class="text-sm text-slate-500 hover:text-[#5600b2] transition-colors" href="#">Servicios</a>
+        <a class="text-sm text-slate-500 hover:text-[#5600b2] transition-colors" href="#">Aviso de Privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+</Layout>
+
+<script>
+  
+  function switchTab(tab: string) {
+    ['nueva', 'reagendar', 'cancelar'].forEach(t => {
+      const panel = document.getElementById(`panel-${t}`);
+      const btn = document.getElementById(`tab-${t}`);
+      if (panel) panel.classList.add('hidden');
+      if (btn) btn.classList.remove('bg-white', 'shadow-sm');
+    });
+
+    const activePanel = document.getElementById(`panel-${tab}`);
+    const activeBtn = document.getElementById(`tab-${tab}`);
+    if (activePanel) activePanel.classList.remove('hidden');
+    if (activeBtn) activeBtn.classList.add('bg-white', 'shadow-sm');
+  }
+  
+  (window as any).switchTab = switchTab;
+
+ 
+  document.querySelectorAll('button[data-confirm]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = (btn as HTMLElement).dataset.confirm;
+      const messages: Record<string, string> = {
+        nueva: '✅ ¡Cita agendada! Recibirás una confirmación en las próximas 24 horas.',
+        reagendar: '✅ ¡Cita reagendada! Te confirmaremos el nuevo horario pronto.',
+        cancelar: '❌ Cita cancelada. Esperamos verte pronto.'
+      };
+      alert(messages[type || 'nueva']);
+    });
+  });
+</script>
