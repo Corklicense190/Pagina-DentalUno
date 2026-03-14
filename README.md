@@ -1,43 +1,58 @@
-# Astro Starter Kit: Minimal
+# Dental Uno — Sitio Web del Consultorio
 
-```sh
-npm create astro@latest -- --template minimal
+Página web informativa para el consultorio dental Dental Uno, desarrollada para presentar los servicios, doctores y facilitar el agendado de citas.
+
+## 🚀 Stack tecnológico
+
+- **Astro** — Framework de desarrollo web para sitios estáticos
+- **Tailwind CSS v4** — Framework de estilos utilitarios
+- **OpenStreetMap** — Mapa interactivo sin API key
+
+## 📁 Estructura del proyecto
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
 ├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── images/         → fotos de doctores y assets
+│   └── favicon.ico
+└── src/
+    ├── components/
+    │   ├── Navbar.astro
+    │   ├── Hero.astro
+    │   ├── Doctores.astro
+    │   ├── PorQueNosotros.astro
+    │   ├── Tratamientos.astro
+    │   ├── Ubicacion.astro
+    │   └── Footer.astro
+    ├── layouts/
+    │   └── Layout.astro
+    ├── pages/
+    │   ├── index.astro
+    │   ├── agendar.astro
+    │   ├── privacidad.astro
+    │   └── terminos.astro
+    └── styles/
+        └── global.css
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 📄 Páginas
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Ruta | Descripción |
+|---|---|
+| `/` | Página principal con todas las secciones |
+| `/agendar` | Formulario para agendar, reagendar o cancelar citas |
+| `/privacidad` | Aviso de privacidad |
+| `/terminos` | Términos y condiciones |
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 🛠️ Correr el proyecto localmente
+```bash
+npm install
+npm run dev
+```
 
-## 🧞 Commands
+El servidor corre en `http://localhost:4321`
 
-All commands are run from the root of the project, from a terminal:
+## 📌 Pendientes futuros
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Conectar formulario a WhatsApp Business API o correo real
+- Integrar mapa con Google Maps
+- Conectar una base de datos para capturar información de pacientes
